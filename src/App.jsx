@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import Header from "./components/Header";
-import Regsiter from "./components/Register";
 import { UrlContext } from "./utils/UrlContext";
 import Unauthorized from "./components/Unauthorized";
 import useFetchUser from "./utils/useFetchUser";
@@ -8,7 +7,7 @@ import Authorized from "./components/Authorized";
 
 function App() {
   const url = useContext(UrlContext);
-  const { loading, error, user, setUser } = useFetchUser(url);
+  const { loading, error, user, setUser, socket } = useFetchUser(url);
 
   if (loading) return <p>Loading...</p>;
 
@@ -17,7 +16,7 @@ function App() {
       <UrlContext value={url}>
         <Header />
         {user ? (
-          <Authorized id={user.id} />
+          <Authorized id={user.id} socket={socket} />
         ) : (
           <Unauthorized user={user} setUser={setUser} />
         )}

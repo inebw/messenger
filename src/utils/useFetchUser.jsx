@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3000");
 
 export default function useFetchUser(url) {
   const [loading, setLoading] = useState(true);
@@ -15,6 +17,7 @@ export default function useFetchUser(url) {
           credentials: "include",
         });
         const data = await resonse.json();
+        socket.emit("join_room", data.id);
         setUser(data);
       } catch (error) {
         setUser(null);
@@ -26,5 +29,5 @@ export default function useFetchUser(url) {
     fetchUser();
   }, []);
 
-  return { loading, error, user, setUser };
+  return { loading, error, user, setUser, socket };
 }

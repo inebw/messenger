@@ -3,7 +3,7 @@ import Friends from "./Friends";
 import Chat from "./Chat";
 import SendMessage from "./SendMessage";
 
-export default function Authorized({ id }) {
+export default function Authorized({ id, socket }) {
   const [chatId, setChatId] = useState(null);
   const friendIdChanger = (friendId) => {
     setChatId(friendId);
@@ -12,8 +12,8 @@ export default function Authorized({ id }) {
     <div className="flex gap-5">
       <Friends id={id} friendIdChanger={friendIdChanger} />
       <div>
-        <Chat id={id} friendId={chatId} />
-        <SendMessage id={id} friendId={chatId} />
+        {chatId && <Chat id={id} friendId={chatId} socket={socket} />}
+        <SendMessage id={id} friendId={chatId} socket={socket} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { UrlContext } from "../utils/UrlContext";
 
-export default function SendMessage({ id, friendId }) {
+export default function SendMessage({ id, friendId, socket }) {
   const url = useContext(UrlContext);
   const [msg, setmsg] = useState("");
 
@@ -11,14 +11,7 @@ export default function SendMessage({ id, friendId }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${url}/messages/${id}/${friendId}`, {
-      method: "POST",
-      body: JSON.stringify({ message: msg }),
-      headers: {
-        "Content-type": "application/json",
-      },
-      credentials: "include",
-    });
+    socket.emit("postMessage", { id, friendId, message: msg });
     setmsg("");
   };
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetchChat(url, id, friendId) {
+export default function useFetchChat(url, id, friendId, socket) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [chat, setChat] = useState(null);
@@ -8,14 +8,10 @@ export default function useFetchChat(url, id, friendId) {
   useEffect(() => {
     const fetchChat = async () => {
       try {
-        const resonse = await fetch(`${url}/messages/${id}/${friendId}`, {
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
+        socket.on("getMessage", (data) => {
+          setChat(data);
         });
-        const data = await resonse.json();
-        setChat(data);
+        socket.emit("postMessage", { id, friendId, message: null });
       } catch (error) {
         setError(error);
       } finally {
@@ -23,7 +19,7 @@ export default function useFetchChat(url, id, friendId) {
       }
     };
     fetchChat();
-  }, [url, friendId]);
+  }, [url, friendId, socket]);
 
   return { loading, error, chat };
 }
