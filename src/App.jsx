@@ -2,15 +2,25 @@ import { useContext } from "react";
 import Header from "./components/Header";
 import Regsiter from "./components/Register";
 import { UrlContext } from "./utils/UrlContext";
+import Unauthorized from "./components/Unauthorized";
+import useFetchUser from "./utils/useFetchUser";
+import Authorized from "./components/Authorized";
 
 function App() {
   const url = useContext(UrlContext);
+  const { loading, error, user, setUser } = useFetchUser(url);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="">
       <UrlContext value={url}>
         <Header />
-        <Regsiter />
+        {user ? (
+          <Authorized id={user.id} />
+        ) : (
+          <Unauthorized user={user} setUser={setUser} />
+        )}
       </UrlContext>
     </div>
   );

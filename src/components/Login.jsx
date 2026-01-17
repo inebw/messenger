@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { UrlContext } from "../utils/UrlContext";
 
-export default function Login() {
+export default function Login({ user, setUser }) {
   const url = useContext(UrlContext);
   const [formData, setFormData] = useState({
     username: "",
@@ -18,12 +18,15 @@ export default function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(`${url}/login`, {
+      method: "POST",
       body: JSON.stringify(formData),
       headers: {
         "Content-type": "application/json",
       },
       credentials: "include",
     });
+    const data = await response.json();
+    setUser(data);
   };
   return (
     <form onSubmit={onSubmit} method="post">
@@ -46,6 +49,7 @@ export default function Login() {
           value={formData.password}
         />
       </label>
+      <button>Login</button>
     </form>
   );
 }
