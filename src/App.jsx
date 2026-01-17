@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="h-screen">
       <UrlContext value={url}>
-        <Header />
+        <Header user={user} setUser={setUser} />
         {user ? (
           <Authorized id={user.id} socket={socket} />
         ) : (

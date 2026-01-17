@@ -20,6 +20,13 @@ export default function AddFriend({ id, setShowAddFriend }) {
       },
       credentials: "include",
     });
+    await fetch(`${url}/friends/${friendId}/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      credentials: "include",
+    });
   };
 
   return (
