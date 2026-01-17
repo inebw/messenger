@@ -12,7 +12,7 @@ function App() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="">
+    <div className="h-screen">
       <UrlContext value={url}>
         <Header />
         {user ? (
