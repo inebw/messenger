@@ -16,8 +16,9 @@ export default function useFetchUser(url) {
           },
           credentials: "include",
         });
+
         const data = await resonse.json();
-        socket.emit("join_room", data.id);
+        socket.emit("online", data.id);
         setUser(data);
       } catch (error) {
         setUser(null);

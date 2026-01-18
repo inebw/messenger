@@ -8,10 +8,11 @@ export default function useFetchChat(url, id, friendId, socket) {
   useEffect(() => {
     const fetchChat = async () => {
       try {
+        socket.emit("join_room", `${id}-${friendId}`);
         socket.on("getMessage", (data) => {
           setChat(data);
         });
-        socket.emit("postMessage", { id, friendId, message: null });
+        socket.emit("getMyMessage", { id, friendId });
       } catch (error) {
         setError(error);
       } finally {
@@ -19,6 +20,9 @@ export default function useFetchChat(url, id, friendId, socket) {
       }
     };
     fetchChat();
+    return () => {
+      socket.emit("leave_room", `${id}-${friendId}`);
+    };
   }, [url, friendId, socket]);
 
   return { loading, error, chat };
