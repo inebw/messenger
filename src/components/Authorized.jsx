@@ -14,13 +14,15 @@ export default function Authorized({ id, socket }) {
     setShowAddFriend(true);
   };
   return (
-    <div className="flex gap-5 relative">
-      {showAddFriend && (
-        <AddFriend id={id} setShowAddFriend={setShowAddFriend} />
-      )}
-      <Friends id={id} friendIdChanger={friendIdChanger} />
-      <button onClick={addFriendHandler}>Add Friend</button>
-      <div>
+    <div className="flex gap-5 relative border h-[90%] ">
+      <div className="flex flex-col gap-5 border ">
+        {showAddFriend && (
+          <AddFriend id={id} setShowAddFriend={setShowAddFriend} />
+        )}
+        <Friends id={id} friendIdChanger={friendIdChanger} />
+        <button onClick={addFriendHandler}>Add Friend</button>
+      </div>
+      <div className="border">
         {chatId && <Chat id={id} friendId={chatId} socket={socket} />}
         <SendMessage id={id} friendId={chatId} socket={socket} />
       </div>

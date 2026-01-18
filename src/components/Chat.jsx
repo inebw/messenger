@@ -12,5 +12,9 @@ export default function Chat({ id, friendId, socket }) {
 
   if (error) return <p>{error.message}</p>;
 
-  return <div>{chat && chat.map((message) => <p>{message.message}</p>)}</div>;
+  return (
+    <div className="border">
+      {chat && chat.map((message) => <p>{message.message}</p>)}
+    </div>
+  );
 }

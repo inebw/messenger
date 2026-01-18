@@ -1,1 +1,18 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: #dedad3;
+  --color-fg: #1d2532;
+  --color-primary: #d5d2cc;
+  --color-secondary: #2a3547;
+  --color-border: #2a3547;
+
+  --color-dbg: #1d2532;
+  --color-dfg: #dedad3;
+  --color-dprimary: #2a3547;
+  --color-dsecondary: #d5d2cc;
+  --color-dborder: #2a3547;
+
+  --font-display: "Nunito Sans";
+}

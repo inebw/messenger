@@ -16,7 +16,7 @@ export default function UserSpace({ user, setUser }) {
 
   const dropDown = () => {
     if (className === "hidden")
-      setClassName("fixed top-0 right-0 translate-y-1/1");
+      setClassName("absolute bottom-0 right-0 translate-y-1/1 ");
     else setClassName("hidden");
   };
   return (

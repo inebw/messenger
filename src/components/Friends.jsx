@@ -12,7 +12,7 @@ export default function Friends({ id, friendIdChanger }) {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div>
+    <div className="">
       <div>
         <input
           type="search"

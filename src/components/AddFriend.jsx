@@ -6,7 +6,8 @@ export default function AddFriend({ id, setShowAddFriend }) {
   const url = useContext(UrlContext);
   const { allUsers, loading, error } = useFetchAllUsers(url);
   const [search, setSearch] = useState("");
-  const defaultClass = "absolute top-1/2 left-1/2";
+  const defaultClass =
+    "absolute top-1/2 left-1/2 border rounded-md w-[50%] h-[50%] translate-y-[-50%] translate-x-[-50%]";
 
   if (loading) return <p className={defaultClass}>Loading ...</p>;
 
