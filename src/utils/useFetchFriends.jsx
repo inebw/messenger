@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetchFriends(url, id) {
+export default function useFetchFriends(url, id, refreshFriends) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [friends, setFriends] = useState(null);
@@ -24,7 +24,7 @@ export default function useFetchFriends(url, id) {
       }
     };
     fetchFriends();
-  }, []);
+  }, [refreshFriends]);
 
   return { loading, error, friends };
 }

@@ -2,20 +2,23 @@ import { useState } from "react";
 import Regsiter from "./Register";
 import Login from "./Login";
 
-export default function Unauthorized({ user, setUser }) {
-  const [register, setRegister] = useState(true);
-
-  const toggleRegister = () => {
-    setRegister((prev) => !prev);
-  };
+export default function Unauthorized({
+  user,
+  setUser,
+  register,
+  toggleRefreshUser,
+}) {
   return (
     <>
-      <div>
-        <button onClick={toggleRegister}>
-          {register ? "Login" : "Register"}
-        </button>
-      </div>
-      {register ? <Regsiter /> : <Login user={user} setUser={setUser} />}
+      {register ? (
+        <Regsiter />
+      ) : (
+        <Login
+          user={user}
+          setUser={setUser}
+          toggleRefreshUser={toggleRefreshUser}
+        />
+      )}
     </>
   );
 }

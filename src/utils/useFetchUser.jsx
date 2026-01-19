@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3000");
 
-export default function useFetchUser(url) {
+export default function useFetchUser(url, refreshUser) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
@@ -28,7 +28,7 @@ export default function useFetchUser(url) {
       }
     };
     fetchUser();
-  }, []);
+  }, [refreshUser]);
 
   return { loading, error, user, setUser, socket };
 }

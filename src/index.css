@@ -4,15 +4,65 @@
 @theme {
   --color-bg: #dedad3;
   --color-fg: #1d2532;
+  --color-fg1: #1d253290;
   --color-primary: #d5d2cc;
   --color-secondary: #2a3547;
   --color-border: #2a3547;
+  --color-bg1: #dedad300;
+  --color-bg2: #dedad3ff;
+  --color-on: #00e65e;
+  --color-yello: #f2cc8f;
+  --color-green: #81b29a;
+  --color-input: #eae0d5;
+  --color-red: #ff6b6b;
 
   --color-dbg: #1d2532;
   --color-dfg: #dedad3;
+  --color-dfg1: #dedad390;
   --color-dprimary: #2a3547;
   --color-dsecondary: #d5d2cc;
   --color-dborder: #2a3547;
+  --color-dbg1: #1d253240;
+  --color-dbg2: #1d2532af;
 
   --font-display: "Nunito Sans";
+  --font-fett: "Monofett";
+}
+
+.btn-3d {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-2 font-display font-bold transition-all duration-150 ease-out cursor-pointer
+  bg-[var(--color-primary)] 
+  text-[var(--color-fg)]
+  shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_2px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_4px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_6px_8px_-2px_rgba(0,0,0,0.1)]
+  dark:bg-[var(--color-dprimary)] 
+  dark:text-[var(--color-dfg)]
+  dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_2px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_4px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_6px_8px_-2px_rgba(0,0,0,0.5)]
+  active:translate-y-1
+  active:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_1px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_1px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_2px_0_0_rgba(0,0,0,0.1)]
+  dark:active:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_1px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_1px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_2px_0_0_rgba(0,0,0,0.3)];
+}
+
+.btn-cd {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-2 font-display font-bold transition-all duration-150 ease-out cursor-pointer
+  shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_2px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_4px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_6px_8px_-2px_rgba(0,0,0,0.1)]
+  dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_2px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_4px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_6px_8px_-2px_rgba(0,0,0,0.5)]
+  active:translate-y-1
+  active:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_1px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_1px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_2px_0_0_rgba(0,0,0,0.1)]
+  dark:active:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_1px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_1px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_2px_0_0_rgba(0,0,0,0.3)];
+}
+
+.box-3d {
+  @apply rounded-lg
+  bg-[var(--color-primary)] 
+  shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_2px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_4px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_6px_8px_-2px_rgba(0,0,0,0.1)]
+  dark:bg-[var(--color-dprimary)] 
+  dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_2px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_4px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_6px_8px_-2px_rgba(0,0,0,0.5)];
+}
+
+.bub-3d {
+  @apply shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_2px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_4px_0_0_color-mix(in_srgb,var(--color-primary),black_20%),0_6px_8px_-2px_rgba(0,0,0,0.1)]
+  dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),0_2px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_4px_0_0_color-mix(in_srgb,var(--color-dprimary),black_30%),0_6px_8px_-2px_rgba(0,0,0,0.5)];
+}
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }

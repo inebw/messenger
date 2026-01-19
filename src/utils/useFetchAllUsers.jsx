@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetchAllUsers(url) {
+export default function useFetchAllUsers(url, id, refreshFriends) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [allUsers, setAllUsers] = useState(null);
@@ -15,7 +15,7 @@ export default function useFetchAllUsers(url) {
           credentials: "include",
         });
         const data = await response.json();
-        setAllUsers(data);
+        setAllUsers(data.filter((user) => user.id !== id));
       } catch (err) {
         setError(err);
       } finally {
@@ -23,7 +23,7 @@ export default function useFetchAllUsers(url) {
       }
     };
     fetchUsers();
-  });
+  }, [refreshFriends]);
 
   return { loading, error, allUsers };
 }
