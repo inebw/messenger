@@ -8,6 +8,7 @@ export default function useFetchChat(url, id, friendId, socket) {
   useEffect(() => {
     const fetchChat = async () => {
       try {
+        setLoading(true);
         socket.emit("join_room", `${id}-${friendId}`);
         socket.on("getMessage", (data) => {
           setChat(data);

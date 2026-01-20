@@ -35,13 +35,13 @@ export default function UserSpace({
       <div className="relative">
         <button
           onClick={dropDown}
-          className="btn-3d w-[200px] flex gap-2 items-center"
+          className="btn-user p-1 sm:px-5 sm:py-2 sm:w-[200px] flex gap-2 items-center"
         >
           <img
-            className="size-7 rounded-md bg-dbg dark:bg-bg"
+            className=" size-10 sm:size-7 rounded-md bg-dbg dark:bg-bg"
             src={user.avatar}
           />
-          <p className="truncate">{user.fullName}</p>
+          <p className="truncate sm:block hidden">{user.fullName}</p>
         </button>
         <div className={className}>
           <button

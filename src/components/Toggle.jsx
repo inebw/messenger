@@ -4,7 +4,7 @@ export default function Toggle({ theme, themeChange, className = "" }) {
     // 1em = 16px. To resize, pass a different text size in `className`.
     <label
       className={`relative inline-block cursor-pointer select-none -webkit-tap-highlight-transparent 
-      text-[4px] w-[16em] h-[7em] ${className}`}
+      sm:text-[4px] text-[3.5px] w-[16em] h-[7em] ${className}`}
     >
       {/* HIDDEN INPUT */}
       <input

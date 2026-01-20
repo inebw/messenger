@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
 import { UrlContext } from "../utils/UrlContext";
+import RegisterMessage from "./RegisterMessage";
 
-export default function Login({ user, setUser, toggleRefreshUser }) {
+export default function Login({ user, setUser, toggleRefreshUser, socket }) {
   const url = useContext(UrlContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState(null);
+  const [msg, setMsg] = useState(null);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -17,6 +20,7 @@ export default function Login({ user, setUser, toggleRefreshUser }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setMsg("loading");
     const response = await fetch(`${url}/login`, {
       method: "POST",
       body: JSON.stringify(formData),
@@ -26,8 +30,17 @@ export default function Login({ user, setUser, toggleRefreshUser }) {
       credentials: "include",
     });
     const data = await response.json();
-    setUser(data);
-    toggleRefreshUser();
+
+    if (response.ok) {
+      setMsg(data);
+      setErrors(null);
+      socket.connect();
+      toggleRefreshUser();
+      setUser(data);
+    } else {
+      setErrors(data);
+      setMsg(null);
+    }
   };
   return (
     <div className="box-3d flex-1 w-full flex flex-col gap-3 items-center justify-center">
@@ -59,6 +72,13 @@ export default function Login({ user, setUser, toggleRefreshUser }) {
         </label>
         <button className="btn-cd bg-green">Login</button>
       </form>
+      {(msg || errors) && (
+        <RegisterMessage
+          msg={msg}
+          errors={errors}
+          toggleRegister={() => console.log(hi)}
+        />
+      )}
     </div>
   );
 }

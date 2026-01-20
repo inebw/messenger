@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import { UrlContext } from "./utils/UrlContext";
 import Unauthorized from "./components/Unauthorized";
@@ -15,13 +15,23 @@ function App() {
     refreshUser,
   );
 
+  useEffect(() => {
+    const currTheme = window.localStorage.getItem("theme");
+    if (currTheme && currTheme === "dark") setTheme("dark");
+  });
+
   const toggleRefreshUser = () => {
     setRefreshUser((prev) => prev + 1);
   };
 
   const themeChange = () => {
-    if (theme === "dark") setTheme("");
-    else setTheme("dark");
+    if (theme === "dark") {
+      setTheme("");
+      window.localStorage.setItem("theme", "");
+    } else {
+      setTheme("dark");
+      window.localStorage.setItem("theme", "dark");
+    }
   };
 
   const toggleRegister = () => {
@@ -32,7 +42,7 @@ function App() {
 
   return (
     <div
-      className={`${theme}  min-h-[100vh] p-2 lg:p-5 lg:ml-[10%] lg:mr-[10%] md:p-2 md:rounded-md bg-bg dark:bg-dbg text-fg dark:text-dfg font-display flex flex-col`}
+      className={`${theme}  min-h-[100vh] gap-3 p-2 sm:p-5 lg:ml-[10%] lg:mr-[10%] md:rounded-md bg-bg dark:bg-dbg text-fg dark:text-dfg font-display flex flex-col`}
     >
       <UrlContext value={url}>
         <Header
@@ -51,7 +61,9 @@ function App() {
             user={user}
             setUser={setUser}
             register={register}
+            toggleRegister={toggleRegister}
             toggleRefreshUser={toggleRefreshUser}
+            socket={socket}
           />
         )}
       </UrlContext>

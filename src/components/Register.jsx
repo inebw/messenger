@@ -1,8 +1,11 @@
 import { useContext, useState } from "react";
 import { UrlContext } from "../utils/UrlContext";
+import RegisterMessage from "./RegisterMessage";
 
-export default function Regsiter() {
+export default function Regsiter({ toggleRegister }) {
   const url = useContext(UrlContext);
+  const [errors, setErrors] = useState(null);
+  const [msg, setMsg] = useState(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,6 +24,7 @@ export default function Regsiter() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setMsg("loading");
     const response = await fetch(`${url}/sign-up`, {
       method: "POST",
       body: JSON.stringify(formData),
@@ -29,20 +33,28 @@ export default function Regsiter() {
       },
       credentials: "include",
     });
-    console.log(response.ok);
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      setMsg(data);
+      setErrors(null);
+    } else {
+      setErrors(data);
+      setMsg(null);
+    }
   };
 
   return (
-    <div className="box-3d p-2 flex-1 w-full grid md:flex md:flex-col gap-3 items-center justify-center">
+    <div className="box-3d p-5 flex-1 w-full grid md:flex md:flex-col gap-3 items-center sm:justify-center">
       <form onSubmit={onSubmit} method="post" className="space-y-3 box-3d p-5">
         <h2 className="text-2xl font-bold text-center md:text-left">
           Register
         </h2>
         <div className="flex flex-col md:flex-row gap-5">
-          <div className="flex flex-col gap-3 items-center">
+          <div className="flex flex-col gap-3 sm:items-center">
             <label htmlFor="firstName">
               <input
-                className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
+                className="p-2 outline-none w-full focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
                 onChange={handleChange}
                 type="text"
                 name="firstName"
@@ -53,7 +65,7 @@ export default function Regsiter() {
             </label>
             <label htmlFor="lastName">
               <input
-                className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
+                className="p-2 outline-none w-full focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
                 onChange={handleChange}
                 type="text"
                 name="lastName"
@@ -65,7 +77,7 @@ export default function Regsiter() {
 
             <label htmlFor="username">
               <input
-                className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
+                className="p-2 outline-none w-full focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
                 onChange={handleChange}
                 type="text"
                 name="username"
@@ -76,7 +88,7 @@ export default function Regsiter() {
             </label>
             <label htmlFor="password">
               <input
-                className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
+                className="p-2 outline-none w-full focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
                 onChange={handleChange}
                 type="password"
                 name="password"
@@ -87,7 +99,7 @@ export default function Regsiter() {
             </label>
             <label htmlFor="confirmPassword">
               <input
-                className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
+                className="p-2 outline-none w-full focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2"
                 onChange={handleChange}
                 type="password"
                 name="confirmPassword"
@@ -201,6 +213,13 @@ export default function Regsiter() {
           Sign Up
         </button>
       </form>
+      {(errors || msg) && (
+        <RegisterMessage
+          errors={errors}
+          msg={msg}
+          toggleRegister={toggleRegister}
+        />
+      )}
     </div>
   );
 }

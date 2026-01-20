@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { UrlContext } from "../utils/UrlContext";
 import useFetchChat from "../utils/useFetchChat";
 import { format } from "date-fns";
+import ChatSkeleton from "../skelton/ChatSkeleton";
 
 export default function Chat({ id, friendId, socket }) {
   const url = useContext(UrlContext);
@@ -9,12 +10,12 @@ export default function Chat({ id, friendId, socket }) {
 
   if (!friendId) return <p>Waiting for friend Id</p>;
 
-  if (loading) return <p>Loading ...</p>;
+  if (loading) return <ChatSkeleton />;
 
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="p-2 flex flex-col-reverse gap-3 h-[64vh] overflow-scroll no-scrollbar">
+    <div className="p-2 flex flex-col-reverse gap-3 h-[56vh] overflow-scroll no-scrollbar">
       {chat &&
         chat.map((message) => (
           <div className="">

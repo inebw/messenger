@@ -7,16 +7,19 @@ export default function Unauthorized({
   setUser,
   register,
   toggleRefreshUser,
+  socket,
+  toggleRegister,
 }) {
   return (
     <>
       {register ? (
-        <Regsiter />
+        <Regsiter toggleRegister={toggleRegister} />
       ) : (
         <Login
           user={user}
           setUser={setUser}
           toggleRefreshUser={toggleRefreshUser}
+          socket={socket}
         />
       )}
     </>

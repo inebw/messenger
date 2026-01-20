@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { UrlContext } from "../utils/UrlContext";
 import useFetchFriends from "../utils/useFetchFriends";
+import FriendsListSkeleton from "../skelton/FriendsSkull";
 
 export default function Friends({
   id,
@@ -12,7 +13,7 @@ export default function Friends({
   const [search, setSearch] = useState("");
   const { friends, error, loading } = useFetchFriends(url, id, refreshFriends);
 
-  if (loading) return <p>Loading ...</p>;
+  if (loading) return <FriendsListSkeleton />;
 
   if (error) return <p>{error.message}</p>;
 
@@ -21,6 +22,7 @@ export default function Friends({
       <div>
         <input
           type="search"
+          className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2 w-full"
           name="search"
           value={search}
           placeholder="search friends..."
@@ -44,7 +46,7 @@ export default function Friends({
               src={friend.avatar}
             />
             <div>
-              <h2 className="font-bold truncate">
+              <h2 className="font-bold line-clamp-1">
                 {friend.first_name} {friend.last_name}
               </h2>
               <div className="flex gap-2 items-center">
