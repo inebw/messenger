@@ -24,7 +24,7 @@ export default function Friends({
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 overflow-scroll no-scrollbar pb-2">
       <div>
         <input
           type="search"

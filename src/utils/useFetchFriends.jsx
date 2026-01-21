@@ -16,7 +16,6 @@ export default function useFetchFriends(url, id, refreshFriends, socket) {
           socket.emit("postFriends", id);
         });
         socket.on("getFriends", (data) => {
-          console.log(data);
           setFriends(data);
         });
       } catch (error) {

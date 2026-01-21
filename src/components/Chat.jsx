@@ -15,7 +15,7 @@ export default function Chat({ id, friendId, socket }) {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="p-2 flex flex-col-reverse gap-3 h-[56vh] overflow-scroll no-scrollbar">
+    <div className="p-2 flex flex-col-reverse gap-3 overflow-scroll no-scrollbar mt-auto">
       {chat &&
         chat.map((message) => (
           <div className="">

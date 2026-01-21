@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const currTheme = window.localStorage.getItem("theme");
-    if (currTheme && currTheme === "dark") setTheme("dark");
+    if (currTheme && currTheme === "light") setTheme("");
   });
 
   const toggleRefreshUser = () => {
@@ -27,7 +27,7 @@ function App() {
   const themeChange = () => {
     if (theme === "dark") {
       setTheme("");
-      window.localStorage.setItem("theme", "");
+      window.localStorage.setItem("theme", "light");
     } else {
       setTheme("dark");
       window.localStorage.setItem("theme", "dark");

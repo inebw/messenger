@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UrlContext } from "../utils/UrlContext";
 import LogoutIcon from "../assets/LogoutIcon";
 
@@ -11,6 +11,12 @@ export default function UserSpace({
 }) {
   const url = useContext(UrlContext);
   const [className, setClassName] = useState("hidden");
+
+  useEffect(() => {
+    if (user) setClassName("hidden");
+    console.log("hi");
+  }, [user]);
+
   const logoutUser = async () => {
     await fetch(`${url}/users/logout`, {
       headers: {
