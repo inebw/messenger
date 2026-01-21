@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetchFriends(url, id, refreshFriends) {
+export default function useFetchFriends(url, id, refreshFriends, socket) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [friends, setFriends] = useState(null);
@@ -8,23 +8,26 @@ export default function useFetchFriends(url, id, refreshFriends) {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const resonse = await fetch(`${url}/friends/${id}`, {
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
+        socket.emit("postFriends", id);
+        socket.on("imOnline", (data) => {
+          socket.emit("postFriends", id);
         });
-        const data = await resonse.json();
-        setFriends(data);
+        socket.on("imOffline", (data) => {
+          socket.emit("postFriends", id);
+        });
+        socket.on("getFriends", (data) => {
+          console.log(data);
+          setFriends(data);
+        });
       } catch (error) {
         setFriends(null);
         setError(error);
       } finally {
-        setLoading(false);
+        if (!friends) setLoading(false);
       }
     };
     fetchFriends();
-  }, [refreshFriends]);
+  }, [refreshFriends, socket]);
 
   return { loading, error, friends };
 }

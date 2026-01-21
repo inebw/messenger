@@ -46,6 +46,7 @@ export default function Authorized({ id, socket }) {
           friendIdChanger={friendIdChanger}
           chatId={chatId}
           refreshFriends={refreshFriends}
+          socket={socket}
         />
         <button
           className="btn-cd mt-auto flex gap-3 bg-yello text-fg"
