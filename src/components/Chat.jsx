@@ -3,6 +3,7 @@ import { UrlContext } from "../utils/UrlContext";
 import useFetchChat from "../utils/useFetchChat";
 import { format } from "date-fns";
 import ChatSkeleton from "../skelton/ChatSkeleton";
+import ChatZero from "./ChatZero";
 
 export default function Chat({ id, friendId, socket }) {
   const url = useContext(UrlContext);
@@ -13,6 +14,8 @@ export default function Chat({ id, friendId, socket }) {
   if (loading) return <ChatSkeleton />;
 
   if (error) return <p>{error.message}</p>;
+
+  if (chat.length === 0) return <ChatZero />;
 
   return (
     <div className="p-2 flex flex-col-reverse gap-3 overflow-scroll no-scrollbar mt-auto">

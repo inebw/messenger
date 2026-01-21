@@ -4,6 +4,7 @@ import { UrlContext } from "./utils/UrlContext";
 import Unauthorized from "./components/Unauthorized";
 import useFetchUser from "./utils/useFetchUser";
 import Authorized from "./components/Authorized";
+import AppLoginSkeleton from "./skelton/AppSkelton";
 
 function App() {
   const url = useContext(UrlContext);
@@ -38,7 +39,7 @@ function App() {
     setRegister((prev) => !prev);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <AppLoginSkeleton />;
 
   return (
     <div className={`${theme} bg-bg dark:bg-dbg`}>

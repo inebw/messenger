@@ -67,7 +67,7 @@ export default function Login({ user, setUser, toggleRefreshUser, socket }) {
       method: "POST",
       body: JSON.stringify({ username: "franksr", password: "frank8888" }),
       headers: {
-        "Content-type": "application/json",
+        "Content-Type": "application/json",
       },
       credentials: "include",
     });

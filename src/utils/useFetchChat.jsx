@@ -12,12 +12,11 @@ export default function useFetchChat(url, id, friendId, socket) {
         socket.emit("join_room", `${id}-${friendId}`);
         socket.on("getMessage", (data) => {
           setChat(data);
+          setLoading(false);
         });
         socket.emit("getMyMessage", { id, friendId });
       } catch (error) {
         setError(error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchChat();

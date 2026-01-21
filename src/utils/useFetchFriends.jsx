@@ -8,6 +8,7 @@ export default function useFetchFriends(url, id, refreshFriends, socket) {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
+        setLoading(true);
         socket.emit("postFriends", id);
         socket.on("imOnline", (data) => {
           socket.emit("postFriends", id);
@@ -17,12 +18,11 @@ export default function useFetchFriends(url, id, refreshFriends, socket) {
         });
         socket.on("getFriends", (data) => {
           setFriends(data);
+          setLoading(false);
         });
       } catch (error) {
         setFriends(null);
         setError(error);
-      } finally {
-        if (!friends) setLoading(false);
       }
     };
     fetchFriends();

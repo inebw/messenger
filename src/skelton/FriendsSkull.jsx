@@ -7,7 +7,7 @@ function FriendsListSkeleton() {
       </div>
 
       {/* Friend skeleton items */}
-      {Array.from({ length: 2 }).map((_, i) => (
+      {Array.from({ length: 4 }).map((_, i) => (
         <div key={i} className="bub-3d rounded-md p-3 flex gap-3">
           {/* Avatar */}
           <div className="size-12 rounded-md bg-dbg dark:bg-bg shrink-0" />

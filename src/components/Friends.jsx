@@ -28,7 +28,7 @@ export default function Friends({
       <div>
         <input
           type="search"
-          className="p-2 outline-none focus:ring-1 rounded-md bg-bg2 dark:bg-dbg2 w-full"
+          className="p-2 px-3 focus:scale-95 transition-transform outline-none  rounded-md bg-bg2 dark:bg-dbg2 w-full"
           name="search"
           value={search}
           placeholder="search friends..."
