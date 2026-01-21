@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const UrlContext = createContext("https://messenger-api.inebw.online");
+export const UrlContext = createContext("/api");
