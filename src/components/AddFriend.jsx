@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import useFetchAllUsers from "../utils/useFetchAllUsers";
 import { UrlContext } from "../utils/UrlContext";
 import useFetchFriends from "../utils/useFetchFriends";
+import FriendIcon from "../assets/FriendIcon";
+import FriendRemoveIcon from "../assets/FriendRemoveIcon";
 
 export default function AddFriend({
   id,
@@ -18,7 +20,7 @@ export default function AddFriend({
   const { friends } = useFetchFriends(url, id, refreshFriends);
   const [search, setSearch] = useState("");
   const defaultClass =
-    "visible absolute top-1/2 left-1/2 box-3d m-2 p-2 rounded-md w-[90%] md:w-[50%] h-[90%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-5";
+    "visible absolute top-1/2 left-1/2 box-3d m-2 p-2 rounded-md w-[90%] md:w-[40%] h-[90%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-5";
 
   if (loading) return <p className={defaultClass}>Loading ...</p>;
 
@@ -69,6 +71,7 @@ export default function AddFriend({
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="enter username to search"
+        autoFocus
       />
       <button
         className="pl-3 pr-3 p-1 font-bold cursor-pointer hover:opacity-80 rounded-[50%] bg-red absolute top-0 right-0 -translate-y-1/2 translate-x-1/2"
@@ -95,17 +98,21 @@ export default function AddFriend({
                   {friends &&
                   friends.find((friend) => friend.id === user.id) ? (
                     <button
-                      className="btn-cd bg-red "
+                      className="btn-cd bg-red flex gap-3 items-center"
                       onClick={() => friendRemover(user.id)}
                     >
-                      Remove Friend -{" "}
+                      <p>Del Friend</p>
+                      <FriendRemoveIcon
+                        className={"w-5 fill-fg dark:fill-dfg"}
+                      />
                     </button>
                   ) : (
                     <button
-                      className="btn-cd bg-green"
+                      className="btn-cd bg-green flex gap-3 items-center"
                       onClick={() => friendAdder(user.id)}
                     >
-                      Add Friend +
+                      <p>Add Friend</p>
+                      <FriendIcon className={"w-5 fill-fg dark:fill-dfg"} />
                     </button>
                   )}
                 </div>

@@ -20,9 +20,7 @@ export default function useFetchGetUser(url, id) {
       } catch (err) {
         setError(err);
       } finally {
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
       }
     };
     fetchUsers();

@@ -3,17 +3,18 @@ import { UrlContext } from "../utils/UrlContext";
 import RegisterMessage from "./RegisterMessage";
 
 export default function Regsiter({ toggleRegister }) {
-  const url = useContext(UrlContext);
-  const [errors, setErrors] = useState(null);
-  const [msg, setMsg] = useState(null);
-  const [formData, setFormData] = useState({
+  const initialFormState = {
     firstName: "",
     lastName: "",
     avatar: "1",
     username: "",
     password: "",
     confirmPassword: "",
-  });
+  };
+  const url = useContext(UrlContext);
+  const [errors, setErrors] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const [formData, setFormData] = useState(initialFormState);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -34,7 +35,7 @@ export default function Regsiter({ toggleRegister }) {
       credentials: "include",
     });
     const data = await response.json();
-    console.log(data);
+    setFormData(initialFormState);
     if (response.ok) {
       setMsg(data);
       setErrors(null);
