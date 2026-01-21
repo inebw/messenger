@@ -15,6 +15,7 @@ export default function useFetchAllUsers(url, id, refreshFriends) {
           credentials: "include",
         });
         const data = await response.json();
+        console.log(data);
         setAllUsers(data.filter((user) => user.id !== id));
       } catch (err) {
         setError(err);

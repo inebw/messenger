@@ -10,6 +10,7 @@ export default function AddFriend({
   setShowAddFriend,
   refreshFriendsList,
   refreshFriends,
+  socket,
 }) {
   const url = useContext(UrlContext);
   const { allUsers, loading, error } = useFetchAllUsers(
@@ -17,7 +18,7 @@ export default function AddFriend({
     id,
     refreshFriends,
   );
-  const { friends } = useFetchFriends(url, id, refreshFriends);
+  const { friends } = useFetchFriends(url, id, refreshFriends, socket);
   const [search, setSearch] = useState("");
   const defaultClass =
     "visible absolute top-1/2 left-1/2 box-3d m-2 p-2 rounded-md w-[90%] md:w-[40%] h-[90%] translate-y-[-50%] translate-x-[-50%] flex flex-col gap-5";

@@ -40,6 +40,7 @@ export default function Authorized({ id, socket }) {
             setShowAddFriend={setShowAddFriend}
             refreshFriendsList={refreshFriendsList}
             refreshFriends={refreshFriends}
+            socket={socket}
           />
         )}
         <Friends
