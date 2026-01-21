@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-const socket = io.connect("/api");
+const socket = io.connect("https://messenger-api.inebw.online");
 
 export default function useFetchUser(url, refreshUser) {
   const [loading, setLoading] = useState(true);
