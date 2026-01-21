@@ -4,6 +4,7 @@ import { UrlContext } from "../utils/UrlContext";
 import useFetchFriends from "../utils/useFetchFriends";
 import FriendIcon from "../assets/FriendIcon";
 import FriendRemoveIcon from "../assets/FriendRemoveIcon";
+import SpinCircle from "../assets/SpinCircle";
 
 export default function AddFriend({
   id,
@@ -13,6 +14,7 @@ export default function AddFriend({
   socket,
 }) {
   const url = useContext(UrlContext);
+  const [waiting, setWaiting] = useState(null);
   const { allUsers, loading, error } = useFetchAllUsers(
     url,
     id,
@@ -28,6 +30,7 @@ export default function AddFriend({
   if (error) return <p>{error.message}</p>;
 
   const friendAdder = async (friendId) => {
+    setWaiting(friendId);
     await fetch(`${url}/friends/${id}/${friendId}`, {
       method: "POST",
       headers: {
@@ -43,9 +46,11 @@ export default function AddFriend({
       credentials: "include",
     });
     refreshFriendsList();
+    setWaiting(null);
   };
 
   const friendRemover = async (friendId) => {
+    setWaiting(friendId);
     await fetch(`${url}/friends/${id}/${friendId}`, {
       method: "DELETE",
       headers: {
@@ -61,6 +66,7 @@ export default function AddFriend({
       credentials: "include",
     });
     refreshFriendsList();
+    setWaiting(null);
   };
 
   return (
@@ -87,7 +93,10 @@ export default function AddFriend({
               user.username.toLowerCase().includes(search.toLowerCase()),
             )
             .map((user) => (
-              <div className="box-3d rounded-md p-3 flex gap-3 cursor-pointer outline-none ">
+              <div
+                key={user.id}
+                className="box-3d rounded-md p-3 flex gap-3 cursor-pointer outline-none "
+              >
                 <img
                   className="size-18 rounded-md bg-dbg dark:bg-bg"
                   src={user.avatar}
@@ -106,6 +115,9 @@ export default function AddFriend({
                       <FriendRemoveIcon
                         className={"w-5 fill-fg dark:fill-dfg"}
                       />
+                      <SpinCircle
+                        className={waiting == user.id ? "" : "hidden"}
+                      />
                     </button>
                   ) : (
                     <button
@@ -114,6 +126,10 @@ export default function AddFriend({
                     >
                       <p>Add Friend</p>
                       <FriendIcon className={"w-5 fill-fg dark:fill-dfg"} />
+
+                      <SpinCircle
+                        className={waiting == user.id ? "" : "hidden"}
+                      />
                     </button>
                   )}
                 </div>
