@@ -46,7 +46,9 @@ export default function AddFriend({
       credentials: "include",
     });
     refreshFriendsList();
-    setWaiting(null);
+    setTimeout(() => {
+      setWaiting(null);
+    }, 1000);
   };
 
   const friendRemover = async (friendId) => {
@@ -66,7 +68,9 @@ export default function AddFriend({
       credentials: "include",
     });
     refreshFriendsList();
-    setWaiting(null);
+    setTimeout(() => {
+      setWaiting(null);
+    }, 1000);
   };
 
   return (
