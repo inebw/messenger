@@ -2,7 +2,7 @@
 
 A responsive, real-time messaging platform built with React and Socket.io.
 
-> [**View Live Demo**]([INSERT LIVE DEMO LINK])
+> [**View Live Demo**]
 > <https://messenger-inky-kappa.vercel.app/>
 
 ## 🛠 Tech Stack
