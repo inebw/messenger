@@ -2,8 +2,7 @@
 
 A responsive, real-time messaging platform built with React and Socket.io.
 
-> [**View Live Demo**]
-> <https://messenger-inky-kappa.vercel.app/>
+> [**View Live Demo**](https://messenger-inky-kappa.vercel.app/)
 
 ## 🛠 Tech Stack
 
@@ -21,8 +20,6 @@ A responsive, real-time messaging platform built with React and Socket.io.
 - **Friend System:** Search, add friends, and view real-time online/offline status.
 - **Dynamic Theming:** specific implementation of Dark/Light mode utilizing Tailwind's `dark:` classes and local storage persistence.
 - **Responsive UI:** Fully responsive layout optimized for mobile, tablet, and desktop views.
-
-## 🚀 Getting Started
 
 ## 📂 Project Structure Highlights
 
