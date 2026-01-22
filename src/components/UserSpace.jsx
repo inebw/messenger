@@ -14,7 +14,6 @@ export default function UserSpace({
 
   useEffect(() => {
     if (user) setClassName("hidden");
-    console.log("hi");
   }, [user]);
 
   const logoutUser = async () => {
