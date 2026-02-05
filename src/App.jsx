@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     const currTheme = window.localStorage.getItem("theme");
     if (currTheme && currTheme === "light") setTheme("");
-  });
+  }, []);
 
   const toggleRefreshUser = () => {
     setRefreshUser((prev) => prev + 1);
